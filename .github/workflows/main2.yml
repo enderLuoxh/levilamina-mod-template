@@ -1,0 +1,39 @@
+name: Build
+
+on:
+  push:
+    paths-ignore:
+      - '**.md'
+      - 'LICENSE'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        config: [Release]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup xmake
+        uses: xmake-io/github-action-setup-xmake@v1
+        with:
+          xmake-version: latest
+
+      - name: Update xmake repositories
+        run: xmake repo -u
+
+      - name: Configure
+        run: xmake f -p windows -a x64 -m ${{ matrix.config }} -y
+
+      - name: Build
+        run: xmake -w -y
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.config }}
+          path: |
+            bin/
+            build/
