@@ -8,10 +8,8 @@ option("target_type")
     set_values("server", "client")
 option_end()
 
--- add_requires("levilamina x.x.x") for a specific version
--- add_requires("levilamina develop") to use develop version
--- please note that you should add bdslibrary yourself if using dev version
-add_requires("levilamina", {configs = {target_type = get_config("target_type")}})
+-- 指定你的 LeviLamina 版本（26.10.14）
+add_requires("levilamina 26.10.14", {configs = {target_type = get_config("target_type")}})
 
 add_requires("levibuildscript")
 
@@ -19,7 +17,8 @@ if not has_config("vs_runtime") then
     set_runtimes("MD")
 end
 
-target("my-mod") -- Change this to your mod name.
+-- 修改插件名称为你的实际插件名
+target("DisgustPlugin")
     add_rules("@levibuildscript/linkrule")
     add_rules("@levibuildscript/modpacker")
     if is_plat("windows") then
