@@ -9,7 +9,7 @@ option("target_type")
 option_end()
 
 -- 指定你的 LeviLamina 版本（26.10.14）
-add_requires("levilamina 26.10.14", {configs = {target_type = get_config("target_type")}})
+add_requires("levilamina 26.10.4", {configs = {target_type = get_config("target_type")}})
 
 add_requires("levibuildscript")
 
